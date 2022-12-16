@@ -35,6 +35,16 @@ async (req, res) => {
   res.status(200).json(newTalker);
 });
 
+router.delete('/talker/:id', checkToken, async (req, res) => {
+  const id = req.params;
+
+  const fileDB = await readFile();
+  const index = fileDB.indexOf((element) => element.id === Number(id));
+  fileDB.splice(index, 1);
+  await writeFile(JSON.stringify(fileDB, null, 2));
+  res.status(204).send();
+});
+
 router.post('/login', checkEmail, checkPassword, (req, res) => {
   const tokenId = tokenGenerator();
   res.status(200).json({ token: `${tokenId}` });
