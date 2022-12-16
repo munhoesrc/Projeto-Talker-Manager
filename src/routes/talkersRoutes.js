@@ -56,8 +56,8 @@ router.post('/talker',
   checkAge,
   checkTalk,
   checkWatchedAt,
-  checkRate,
   checkRateExists,
+  checkRate,
   async (req, res) => {
     const fileDB = await readFile();
     const id = fileDB.length + 1;
